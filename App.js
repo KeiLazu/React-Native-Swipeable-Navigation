@@ -1,14 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
+import {createMaterialTopTabNavigator} from 'react-navigation';
+
+import Icons from 'react-native-vector-icons/Ionicons';
+
+export default class App extends React.Component {
+  render() {
+    return(
+      <SafeAreaView style={{flex:1}}>
+        <AppNavTop/>
+      </SafeAreaView>
+    );
+  }
+}
 
 class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <Text>HOME</Text>
       </View>
     );
   }
@@ -17,15 +29,65 @@ class HomeScreen extends React.Component {
 class SettingScreen extends React.Component {
   render() {
     return(<View style={styles.container}>
-      <Text>Changes you make will automatically reload.</Text>
+      <Text>SETTING</Text>
     </View>
     );
   }
 }
 
-export default createMaterialBottomTabNavigator({
-  Home: {screen: HomeScreen},
-  Setting: {screen: SettingScreen}
+class ContactScreen extends React.Component {
+  render() {
+    return(<View style={styles.container}>
+      <Text>CONTACT</Text>
+    </View>
+    );
+  }
+}
+
+class ProfileScreen extends React.Component {
+  render() {
+    return(<View style={styles.container}>
+      <Text>PROFILE</Text>
+    </View>
+    );
+  }
+}
+
+const AppNavTop = createMaterialTopTabNavigator({
+  Home: {screen: HomeScreen,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => (
+        <Icons name="ios-home" color={tintColor} size={24} />
+      )
+    }
+  },
+  Contact: {screen: ContactScreen,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => (
+        <Icons name="ios-home" color={tintColor} size={24} />
+      )
+    }
+  },
+  Profile: {screen: ProfileScreen,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => (
+        <Icons name="ios-home" color={tintColor} size={24} />
+      )
+    }
+  },
+  Setting: {screen: SettingScreen,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => (
+        <Icons name="ios-settings" color={tintColor} size={24} />
+      )
+    }
+  }
+},{
+  initialRouteName: 'Home',
+  tabBarPosition: 'bottom',
+  tabBarOptions: {
+    showIcon: true,
+  }
 })
 
 const styles = StyleSheet.create({
